@@ -110,36 +110,3 @@ print sum(hyp_1[i] for i in hyp_1['total_vaccinations'] if i != '2021-12-%%''202
 # Calculate the sample size, mean and variance of each sample...
 # We will need this information to calculate standard errors
 
-sample_1_n = hyp_1.shape[0]
-#sample_2_n = private.shape[0]
-sample_1_mean = hyp_1['total_vaccinations'].mean()
-#sample_2_mean = private['Total Annual Cost'].mean()
-sample_1_var = hyp_1['total_vaccinations'].var()
-#sample_2_var = private['Total Annual Cost'].var()
-
-std_err_difference = math.sqrt((sample_1_var/sample_1_n)+(sample_2_var/sample_2_n))
-
-mean_difference = sample_2_mean - sample_1_mean
-
-margin_of_error = 1.96 * std_err_difference
-ci_lower = mean_difference - margin_of_error
-ci_upper = mean_difference + margin_of_error
-
-print("The difference in means at the 95% confidence interval is between "+str(ci_lower)+" and "+str(ci_upper)+".")
-
-"""The results from our confidence interval show a very substantial difference in means and provides us the evidence to reject our null.
-
-*I would say that the 0 cost values for the Military institutions play a part in our findings , but they are technically public and that is their cost.*
-
-**Private Total Annual Cost: $57,082.63**
-
-**Public Total Annual Cost: $39,526.25**
-
-**We can reject our hypothesis that private institutions have a lower average Total Annual Cost. Our P-value and confidence interval strongly support our conclusion to reject the null.** 
-
-**From this result we can gather that those looking for a lower cost may want to gear their college search towards public institutions.**
-"""
-
-ax = sns.barplot(x="Public/Private", y="Total Annual Cost", hue="Public/Private", data=df)
-
-"""The bar-plot above is merely a visualisation of the means for both public and private institutions. I thought this would be a nice capstone for this hypothesis. """
